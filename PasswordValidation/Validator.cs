@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
 namespace PasswordValidation
 {
@@ -21,8 +17,7 @@ namespace PasswordValidation
 
         public void IsCorrectLength()
         {
-            if (_password.Length > 24 ||
-                _password.Length < 6) IsValid = false;
+            if (_password.Length > 24 || _password.Length < 6) IsValid = false;
         }
 
         public void HasCorrectCases()
@@ -59,29 +54,37 @@ namespace PasswordValidation
                 char c2 = ShiftedPassword1[i];
                 if (c == c1 && c1 == c2) isRepeating = true;
             }
-            if (!isRepeating) IsValid = false;
+            if (isRepeating) IsValid = false;
         }
 
         public void CreateShiftedString1() // "aaaW123@"
         {
             string s = "";
+            char offsetLength = '1';
             for(int i = 1; i < _password.Length; i++)
             {
                 char c = _password[i];
                 s += c;
             }
+            s += offsetLength;
             ShiftedPassword = s;
         }
 
         public void CreateShiftedString2() // "W123aaa@"
         {
             string s = "";
+            char offsetLength = '2';
+            char offsetLength1 = '3';
             for (int i = 2; i < _password.Length; i++)
             {
                 char c = _password[i];
                 s += c;
             }
+            s += offsetLength;
+            s += offsetLength1;
             ShiftedPassword1 = s;
         }
+
+        public bool IsPasswordValid() => IsValid;
     }
 }

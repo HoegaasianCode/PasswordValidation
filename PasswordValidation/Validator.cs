@@ -32,6 +32,25 @@ namespace PasswordValidation
             }
             if (!isUpper || !isLower) IsValid = false;
         }
+        
+        public void IsValidSpecialChar()
+        {
+            bool isSpecial = false;
+            for(int i = 0; i < _password.Length; i++)
+            {
+                char c = _password[i];
+                if (!Char.IsLetterOrDigit(c)) isSpecial = MatchSpecialChar(c);
+                if (!isSpecial) IsValid = false;
+            }
+        }
+
+        private static bool MatchSpecialChar(char c)
+        {
+            string s = "!#%&/()[]?|";
+            if (s.Contains(c))
+            return true;
+            else return false;
+        }
 
         public void IsDigit()
         {
